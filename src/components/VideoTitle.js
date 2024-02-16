@@ -14,4 +14,5 @@ const VideoTitle = ({ title, overview }) => {
     </div>
   );
 };
+
 export default VideoTitle;
