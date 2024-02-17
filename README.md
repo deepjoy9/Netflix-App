@@ -1,6 +1,6 @@
 About This Project:
 
-This Project offers a seamless movie browsing experience with the following features:
+This App offers a seamless movie browsing experience with the following features:
 
 TMDB Integration: Fetches movie details from The Movie Database (TMDB).
 
