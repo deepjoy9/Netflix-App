@@ -15,3 +15,4 @@ const MovieList = ({ title, movies }) => {
   );
 };
 export default MovieList;
+
