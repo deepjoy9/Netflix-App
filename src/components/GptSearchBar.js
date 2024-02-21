@@ -25,16 +25,12 @@ const GptSearchBar = () => {
 
   const handleGptSearchClick = async () => {
     const gptResults = searchText.current.value;
-    console.log(gptResults);
 
     const gptMovies = gptResults.split(" ");
-    console.log(gptMovies);
 
     const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
 
     const tmdbResults = await Promise.all(promiseArray);
-
-    console.log(tmdbResults);
 
     dispatch(
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
