@@ -3,7 +3,6 @@ import Browse from "./Browse";
 import Login from "./Login";
 import { RouterProvider } from "react-router-dom";
 import WatchPage from "./WatchPage";
-import MainContainer from "./MainContainer";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -14,6 +13,10 @@ const Body = () => {
     {
       path: "/browse",
       element: <Browse />,
+    },
+    {
+      path: "/watch",
+      element: <WatchPage />,
     },
   ]);
 
