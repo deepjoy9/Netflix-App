@@ -8,7 +8,7 @@ const WatchPage = () => {
   const movieId = searchParams.get("v");
   console.log(movieId);
   useWatchVideo(movieId);
-  const watchVideo = useSelector((store) => store.movies?.trailerVideo);
+  const watchVideo = useSelector((store) => store.movies?.watchVideo);
 
   return (
     <div className="w-screen h-screen bg-black">
