@@ -1,5 +1,5 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
@@ -7,12 +7,16 @@ import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGptSearchView } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
+import USER_ICON from "../assets/USER_ICON.png";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  console.log(user);
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {})
@@ -39,10 +43,13 @@ const Header = () => {
         navigate("/");
       }
     });
-
-    // Unsiubscribe when component unmounts
+    // Unsubscribe when component unmounts
     return () => unsubscribe();
   }, []);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const handleGptSearchClick = () => {
     // Toggle GPT Search
@@ -74,16 +81,22 @@ const Header = () => {
             className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
             onClick={handleGptSearchClick}
           >
-            {showGptSearch ? "Homepage" : "GPT Search"}
+            {showGptSearch ? "Homepage" : "Search"}
           </button>
           <img
-            className="hidden md:block w-12 h-12"
+            className="hidden md:block w-12 h-12 cursor-pointer"
             alt="usericon"
-            src={user?.photoURL}
+            src={USER_ICON}
+            onClick={toggleDropdown}
           />
-          <button onClick={handleSignOut} className="font-bold text-white ">
-            (Sign Out)
-          </button>
+          {isDropdownOpen && (
+            <div className="absolute bg-[#333333] text-slate-400 mt-14 w-48 right-2 p-2 rounded-lg shadow-lg">
+              <ul>
+                <div className="">Welcome {user.displayName}</div>
+                <button onClick={handleSignOut}>Sign out</button>
+              </ul>
+            </div>
+          )}
         </div>
       )}
     </div>
