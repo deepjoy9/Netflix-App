@@ -13,7 +13,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
-  console.log(user);
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

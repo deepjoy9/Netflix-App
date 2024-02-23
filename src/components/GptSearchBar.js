@@ -19,18 +19,13 @@ const GptSearchBar = () => {
       API_OPTIONS
     );
     const json = await data.json();
-
     return json.results;
   };
 
   const handleGptSearchClick = async () => {
-    const gptResults = searchText.current.value;
-
-    const gptMovies = gptResults.split(" ");
-
-    const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
-
-    const tmdbResults = await Promise.all(promiseArray);
+    const gptMovies = searchText.current.value.split(" ");
+    const data = gptMovies.map((movie) => searchMovieTMDB(movie));
+    const tmdbResults = await Promise.all(data);
 
     dispatch(
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
