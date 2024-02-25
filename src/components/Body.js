@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import Browse from "./Browse";
 import Login from "./Login";
 import { RouterProvider } from "react-router-dom";
-import WatchPage from "./WatchPage";
+import { Suspense, lazy } from "react";
+
+const Browse = lazy(() => import("./Browse"));
+const WatchPage = lazy(() => import("./WatchPage"));
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -12,11 +14,19 @@ const Body = () => {
     },
     {
       path: "/browse",
-      element: <Browse />,
+      element: (
+        <Suspense>
+          <Browse />
+        </Suspense>
+      ),
     },
     {
       path: "/watch",
-      element: <WatchPage />,
+      element: (
+        <Suspense>
+          <WatchPage />
+        </Suspense>
+      ),
     },
   ]);
 
