@@ -6,7 +6,6 @@ import useWatchVideo from "../hooks/useWatchVideo";
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const movieId = searchParams.get("v");
-  console.log(movieId);
   useWatchVideo(movieId);
   const watchVideo = useSelector((store) => store.movies?.watchVideo);
 
