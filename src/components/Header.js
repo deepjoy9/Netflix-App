@@ -2,12 +2,13 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGptSearchView } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
 import USER_ICON from "../assets/USER_ICON.png";
+import APP_LOGO from "../assets/APP_LOGO.png";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -59,9 +60,18 @@ const Header = () => {
     dispatch(changeLanguage(e.target.value));
   };
 
+  const Title = () => (
+    <div className="text-white flex items-center mx-4">
+      <img className=" h-10" src={APP_LOGO} alt="" />
+      <h1 className="font-serif font-bold text-2xl m-0 mx-1 ml-4">
+        CineSuggest
+      </h1>
+    </div>
+  );
+
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
-      <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
+      <Title />
       {user && (
         <div className="flex p-2 justify-between">
           {showGptSearch && (
